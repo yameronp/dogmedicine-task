@@ -96,7 +96,7 @@ document.getElementById('doseForm').addEventListener('submit', function(e) {
     // Show share options after calculation
     const shareOptions = document.getElementById('share-options');
     shareOptions.style.display = 'flex';
-  });
+});
 
 // Add live update functionality
 function updateLivePreview() {
@@ -164,21 +164,44 @@ document.head.appendChild(script);
 
 // Download PDF functionality
 document.getElementById('downloadPDF').addEventListener('click', function() {
-  const output = document.getElementById('output');
-  if (!output.innerHTML.trim()) {
-    alert('Please calculate prescription details first.');
-    return;
-  }
+  // Create PDF using html2pdf instead of jsPDF for better HTML rendering
+  const outputSection = document.getElementById('output');
+  const element = document.createElement('div');
+  
+  // Create header
+  const header = document.createElement('div');
+  header.innerHTML = `
+    <h1 style="color: #333; margin-bottom: 20px;">Dog Worming Prescription</h1>
+    <p style="margin-bottom: 10px;">Date: ${new Date().toLocaleDateString()}</p>
+  `;
+  element.appendChild(header);
+  
+  // Add prescription content
+  const content = document.createElement('div');
+  content.innerHTML = outputSection.innerHTML;
+  element.appendChild(content);
+  
+  // Add footer
+  const footer = document.createElement('div');
+  footer.innerHTML = `
+    <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
+      <p>Veterinary Clinic Prescription</p>
+      <p>This is an official prescription document.</p>
+    </div>
+  `;
+  element.appendChild(footer);
 
+  // PDF options
   const opt = {
     margin: 1,
-    filename: 'dog-prescription.pdf',
+    filename: 'dog_worming_prescription.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
   };
 
-  html2pdf().set(opt).from(output).save();
+  // Generate PDF
+  html2pdf().set(opt).from(element).save();
 });
 
 // Email functionality
