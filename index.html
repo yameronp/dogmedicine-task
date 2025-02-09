@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dog Worming Dose Calculator</title>
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Dog Worming Dose Calculator</h1>
+    <!-- Optional: Add a logo if you have one -->
+    <!-- <img src="assets/logo.png" alt="Clinic Logo"> -->
+  </header>
+  
+  <main class="calculator-container">
+    <div class="form-section">
+      <form id="doseForm">
+        <div class="form-group">
+          <div class="tooltip-wrapper">
+            <label for="weight">Enter Dog's Weight (kg):</label>
+            <span class="tooltip-text">Weight is needed to calculate the correct dosage of worming medication</span>
+            <input type="number" id="weight" name="weight" min="0" step="0.1" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Select Dog Category:</label>
+          <div class="tooltip-wrapper">
+            <input type="radio" id="adult" name="category" value="adult" checked>
+            <label for="adult">Adult Dog</label>
+            <span class="tooltip-text">For dogs over 12 weeks old that are not nursing</span>
+          </div>
+          <div class="tooltip-wrapper">
+            <input type="radio" id="puppy" name="category" value="puppy">
+            <label for="puppy">Puppy (under 12 weeks)</label>
+            <span class="tooltip-text">Puppies need special dosing due to their developing immune system</span>
+          </div>
+          <div class="tooltip-wrapper">
+            <input type="radio" id="nursing" name="category" value="nursing">
+            <label for="nursing">Nursing Bitch</label>
+            <span class="tooltip-text">Nursing dogs require additional medication to protect both mother and puppies</span>
+          </div>
+        </div>
+        
+        <div class="form-buttons">
+          <button type="submit">Calculate</button>
+          <button type="reset" id="resetBtn">Reset</button>
+        </div>
+      </form>
+      
+      <section id="live-preview" class="live-preview">
+        <h3>Live Cost Estimate</h3>
+        <div class="preview-content">
+          <p id="live-medication"></p>
+          <p id="live-cost"></p>
+        </div>
+      </section>
+    </div>
+
+    <section id="output">
+      <!-- Prescription details will appear here -->
+    </section>
+
+    <section id="share-options" class="share-options">
+      <button id="downloadPDF" class="action-button">
+        <i class="fas fa-file-pdf"></i> Download PDF
+      </button>
+      <button id="emailPrescription" class="action-button">
+        <i class="fas fa-envelope"></i> Email Prescription
+      </button>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Veterinary Clinic</p>
+  </footer>
+  
+  <!-- Link to the JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
